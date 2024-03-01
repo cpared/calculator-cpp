@@ -7,13 +7,16 @@
 
 class Publisher {
  public:
+    Publisher();
     void notifyRender(SDL_Renderer* renderer);
-    void notifyOnHover(SDL_Renderer* renderer, int x, int y);
+    void notifyOnMouseClick(SDL_Renderer* renderer, int x, int y);
     void notifyOnClick(SDL_Renderer* renderer, int x, int y);
     void addSubscriber(Subscriber* subscriber);
     void removeSubscriber(Subscriber* subscriber);
     std::vector<Subscriber*> getSubscribers();
+    ~Publisher();
  private:
+    Stack stack_;
     std::vector<Subscriber*> subscribers_;
 };
 

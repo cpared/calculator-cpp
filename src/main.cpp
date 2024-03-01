@@ -31,7 +31,6 @@ int main() {
     SDL_Color color = {255, 255, 255, 255};
 
     Publisher pub;
-    pub.addSubscriber(new Display(renderer, "", {0, 0}, font, color));
     pub.addSubscriber(new Button(renderer, "1", {50, 150}, font, color));
     pub.addSubscriber(new Button(renderer, "2", {50, 250}, font, color));
     pub.addSubscriber(new Button(renderer, "3", {50, 350}, font, color));
@@ -42,6 +41,7 @@ int main() {
     pub.addSubscriber(new Button(renderer, "8", {250, 250}, font, color));
     pub.addSubscriber(new Button(renderer, "9", {250, 350}, font, color));
     pub.addSubscriber(new Button(renderer, "0", {150, 450}, font, color));
+    pub.addSubscriber(new Display(renderer, {0, 50}, color));
 
     // Main loop
     SDL_Event event;
@@ -53,11 +53,7 @@ int main() {
             } else if (event.type == SDL_MOUSEBUTTONDOWN) {
                 int x, y;
                 SDL_GetMouseState(&x, &y);
-                pub.notifyOnHover(renderer, x, y);
-            } else if (event.type == SDL_MOUSEMOTION) {
-                int x, y;
-                SDL_GetMouseState(&x, &y);
-                pub.notifyOnHover(renderer, x, y);
+                pub.notifyOnMouseClick(renderer, x, y);
             }
         }
 
